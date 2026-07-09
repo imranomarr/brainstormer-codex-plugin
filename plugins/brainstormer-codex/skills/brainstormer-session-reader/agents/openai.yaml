@@ -1,0 +1,4 @@
+interface:
+  display_name: "Brainstormer Session Reader"
+  short_description: "Read approved Brainstormer sessions through MCP."
+  default_prompt: "Summarize the approved Brainstormer session."

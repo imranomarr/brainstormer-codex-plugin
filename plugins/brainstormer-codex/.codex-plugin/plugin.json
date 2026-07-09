@@ -1,0 +1,44 @@
+{
+  "name": "brainstormer-codex",
+  "version": "0.1.0+codex.20260709040952",
+  "description": "Read approved Brainstormer sessions in Codex through the Brainstormer MCP server.",
+  "author": {
+    "name": "Brainstormer",
+    "email": "imran@brainstormer.chat",
+    "url": "https://brainstormer.chat"
+  },
+  "homepage": "https://brainstormer.chat",
+  "keywords": [
+    "brainstormer",
+    "codex",
+    "mcp",
+    "oauth",
+    "read-only"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Brainstormer",
+    "shortDescription": "Read one approved Brainstormer session from Codex.",
+    "longDescription": "Brainstormer Codex connects Codex to Brainstormer through a read-only OAuth MCP server. Codex can inspect the single Brainstormer session the user approves, summarize nodes and tasks, and search session context without creating or changing Brainstormer data.",
+    "developerName": "Brainstormer",
+    "category": "Productivity",
+    "capabilities": [
+      "MCP",
+      "OAuth",
+      "Read-only",
+      "Session-scoped"
+    ],
+    "websiteURL": "https://brainstormer.chat",
+    "privacyPolicyURL": "https://brainstormer.chat/privacy",
+    "termsOfServiceURL": "https://brainstormer.chat/terms",
+    "defaultPrompt": [
+      "Summarize my approved Brainstormer session.",
+      "Find Brainstormer nodes about this topic.",
+      "List open tasks from Brainstormer."
+    ],
+    "brandColor": "#0B1110",
+    "composerIcon": "./assets/icon.png",
+    "logo": "./assets/logo.png"
+  },
+  "mcpServers": "./.mcp.json"
+}
