@@ -32,6 +32,14 @@ Then restart Codex, open Plugins, choose Brainstormer, and install Brainstormer.
 
 It cannot create, edit, delete, move, or share Brainstormer data.
 
+## Troubleshooting
+
+- Not signed in? Sign in to Brainstormer, then approve Codex access.
+- New account? Finish signup first, then start the Codex connection again.
+- Expired request? Restart the Brainstormer connection from Codex Desktop.
+- No sessions showing? Open or create a Brainstormer session first.
+- Wrong session approved? Revoke Codex access in Brainstormer, then reconnect.
+
 ## Notes
 
-This is a beta plugin package. Users must approve a Brainstormer session before Codex can read session context.
+This is a beta plugin package. Users must approve a Brainstormer session before Codex can read session context. Access is read-only and reversible from Brainstormer.
