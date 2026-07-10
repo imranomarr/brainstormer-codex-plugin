@@ -1,31 +1,39 @@
 {
   "name": "brainstormer-codex",
-  "version": "0.1.0+codex.20260709040952",
-  "description": "Read approved Brainstormer sessions in Codex through the Brainstormer MCP server.",
+  "version": "0.3.0-beta.1",
+  "description": "Read and organize one approved Brainstormer session in Codex through the Brainstormer MCP server.",
   "author": {
     "name": "Brainstormer",
     "email": "imran@brainstormer.chat",
     "url": "https://brainstormer.chat"
   },
   "homepage": "https://brainstormer.chat",
+  "repository": "https://github.com/imranomarr/brainstormer-codex-plugin",
   "keywords": [
     "brainstormer",
     "codex",
     "mcp",
     "oauth",
-    "read-only"
+    "nodes",
+    "notes",
+    "tasks",
+    "kanban",
+    "timeline"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Brainstormer",
-    "shortDescription": "Read one approved Brainstormer session from Codex.",
-    "longDescription": "Brainstormer Codex connects Codex to Brainstormer through a read-only OAuth MCP server. Codex can inspect the single Brainstormer session the user approves, summarize nodes and tasks, and search session context without creating or changing Brainstormer data.",
+    "shortDescription": "Read, create notes, and organize one approved Brainstormer session.",
+    "longDescription": "Brainstormer Codex connects Codex to Brainstormer through a scoped OAuth MCP server. Codex can inspect the single approved session, create new notes/nodes, and use approved tools for tasks, Task Groups, Kanban boards, and custom timeline events without node editing, delete, sharing, cross-session, or account-wide access.",
     "developerName": "Brainstormer",
     "category": "Productivity",
     "capabilities": [
       "MCP",
       "OAuth",
-      "Read-only",
+      "Node creation",
+      "Task tools",
+      "Kanban tools",
+      "Timeline tools",
       "Session-scoped"
     ],
     "websiteURL": "https://brainstormer.chat",
@@ -33,8 +41,8 @@
     "termsOfServiceURL": "https://brainstormer.chat/terms",
     "defaultPrompt": [
       "Summarize my approved Brainstormer session.",
-      "Find Brainstormer nodes about this topic.",
-      "List open tasks from Brainstormer."
+      "Turn the previous answer into separate Brainstormer nodes.",
+      "Help me create or update Brainstormer tasks."
     ],
     "brandColor": "#0B1110",
     "composerIcon": "./assets/icon.png",

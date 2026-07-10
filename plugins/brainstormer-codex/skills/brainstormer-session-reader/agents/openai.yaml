@@ -1,4 +1,4 @@
 interface:
-  display_name: "Brainstormer Session Reader"
-  short_description: "Read approved Brainstormer sessions through MCP."
-  default_prompt: "Summarize the approved Brainstormer session."
+  display_name: "Brainstormer Session Organizer"
+  short_description: "Read, create notes, and organize one approved Brainstormer session through MCP."
+  default_prompt: "Turn the previous answer into separate Brainstormer nodes."
