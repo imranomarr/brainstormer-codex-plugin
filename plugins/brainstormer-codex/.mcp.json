@@ -1,8 +1,8 @@
 {
-  "mcpServers": {
-    "brainstormer": {
-      "type": "http",
-      "url": "https://brainstormer.chat/api/codex-mcp"
-    }
+  "brainstormer": {
+    "type": "http",
+    "url": "https://brainstormer.chat/api/codex-mcp",
+    "auth": "oauth",
+    "default_tools_approval_mode": "writes"
   }
 }
