@@ -4,25 +4,31 @@ Brainstormer lets Codex read and organize one Brainstormer session that the user
 
 ## Install From Codex Desktop
 
-Open Codex Desktop, start a new thread, and paste this:
+Open Codex Desktop, start a new task, and paste this:
 
 ```text
-Install the Brainstormer Codex plugin marketplace from GitHub:
+Set up the Brainstormer Codex plugin from GitHub:
 imranomarr/brainstormer-codex-plugin
 
-If needed, run:
-codex plugin marketplace add imranomarr/brainstormer-codex-plugin
+1. Check whether the `brainstormer` marketplace is already configured. If not, run:
+   codex plugin marketplace add imranomarr/brainstormer-codex-plugin
+
+2. Check whether `brainstormer-codex@brainstormer` is installed. If not, run:
+   codex plugin add brainstormer-codex@brainstormer
+
+Do not remove or modify any other plugins. Tell me when setup is complete and whether I need to restart Codex.
 ```
 
-Approve the setup command if Codex asks. Then restart Codex, open Plugins, choose Brainstormer, and install Brainstormer.
+Approve the setup commands if Codex asks. Then restart Codex, start a new task, and complete the Brainstormer OAuth approval when prompted.
 
 ## Install From Terminal
 
 ```bash
 codex plugin marketplace add imranomarr/brainstormer-codex-plugin
+codex plugin add brainstormer-codex@brainstormer
 ```
 
-Then restart Codex, open Plugins, choose Brainstormer, and install Brainstormer.
+Then restart Codex, start a new task, and complete the Brainstormer OAuth approval when prompted.
 
 ## What It Can Do
 
