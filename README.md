@@ -13,7 +13,10 @@ imranomarr/brainstormer-codex-plugin
 1. Check whether the `brainstormer` marketplace is already configured. If not, run:
    codex plugin marketplace add imranomarr/brainstormer-codex-plugin
 
-2. Check whether `brainstormer-codex@brainstormer` is installed. If not, run:
+   If it is already configured, refresh it:
+   codex plugin marketplace upgrade brainstormer
+
+2. Install the current Brainstormer plugin release, even if an older beta is already installed:
    codex plugin add brainstormer-codex@brainstormer
 
 Do not remove or modify any other plugins. Tell me when setup is complete and whether I need to restart Codex.
@@ -23,8 +26,17 @@ Approve the setup commands if Codex asks. Then restart Codex, start a new task, 
 
 ## Install From Terminal
 
+First-time setup:
+
 ```bash
 codex plugin marketplace add imranomarr/brainstormer-codex-plugin
+codex plugin add brainstormer-codex@brainstormer
+```
+
+Updating an existing installation:
+
+```bash
+codex plugin marketplace upgrade brainstormer
 codex plugin add brainstormer-codex@brainstormer
 ```
 
@@ -39,6 +51,8 @@ Then restart Codex, start a new task, and complete the Brainstormer OAuth approv
 - Create and update standalone tasks and Task Groups.
 - Create and update Kanban boards/cards.
 - Create and update custom timeline events.
+
+Codex can access shared content in the approved session. Private Spaces and their linked tasks are never included, even when they belong to the approving user.
 
 It cannot edit, move, or delete existing nodes; create private-space nodes; delete Brainstormer data; share sessions; access other sessions; run raw database writes; or get account-wide access.
 
@@ -70,6 +84,7 @@ It cannot edit, move, or delete existing nodes; create private-space nodes; dele
 - Node creation unavailable? Revoke the old grant, reconnect, and confirm the approval page lists new note/node creation.
 - Node limit reached? A folder counts as one node, so grouped batches need one additional available slot.
 - Wrong session approved? Revoke Codex access in Brainstormer, then reconnect.
+- Old plugin wording still showing? Refresh the `brainstormer` marketplace, reinstall `brainstormer-codex@brainstormer`, restart Codex, and use a new task.
 - Upgrading from an earlier local beta? Install the current `brainstormer` marketplace release and verify it in a new Codex task before removing older `personal` or `brainstormer-beta` copies and any manually configured Brainstormer MCP server.
 
 ## Revoke Or Reconnect
@@ -78,6 +93,6 @@ Open Brainstormer, go to Connectors, choose Codex, and revoke the active grant. 
 
 ## Notes
 
-This is a beta plugin package. Users must approve a Brainstormer session before Codex can access session context or use write tools. Access is session-scoped and reversible from Brainstormer.
+This is a beta plugin package. Users must approve a Brainstormer session before Codex can access shared session context or use write tools. Access is session-scoped, excludes Private Spaces, and is reversible from Brainstormer.
 
 For help or security reports, contact `imran@brainstormer.chat`. Do not include bearer tokens, OAuth codes, session content, or other private data in reports.

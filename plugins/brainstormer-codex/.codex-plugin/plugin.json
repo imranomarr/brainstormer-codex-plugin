@@ -1,7 +1,7 @@
 {
   "name": "brainstormer-codex",
-  "version": "0.3.0-beta.2",
-  "description": "Read and organize one approved Brainstormer session in Codex through the Brainstormer MCP server.",
+  "version": "0.3.0-beta.3",
+  "description": "Read shared content and organize one approved Brainstormer session in Codex through the Brainstormer MCP server.",
   "author": {
     "name": "Brainstormer",
     "email": "imran@brainstormer.chat",
@@ -23,8 +23,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Brainstormer",
-    "shortDescription": "Read, create notes, and organize one approved Brainstormer session.",
-    "longDescription": "Brainstormer Codex connects Codex to Brainstormer through a scoped OAuth MCP server. Codex can inspect the single approved session, create new notes/nodes, and use approved tools for tasks, Task Groups, Kanban boards, and custom timeline events without node editing, delete, sharing, cross-session, or account-wide access.",
+    "shortDescription": "Read shared content, create notes, and organize one approved session.",
+    "longDescription": "Brainstormer Codex connects Codex to one OAuth-approved Brainstormer session. Codex can inspect shared session content, create new root notes/nodes, and use approved tools for standalone tasks, Task Groups, shared Kanban boards, and custom timeline events. Private Spaces and their linked tasks are never included.",
     "developerName": "Brainstormer",
     "category": "Productivity",
     "capabilities": [
@@ -34,7 +34,8 @@
       "Task tools",
       "Kanban tools",
       "Timeline tools",
-      "Session-scoped"
+      "Session-scoped",
+      "Shared-only access"
     ],
     "websiteURL": "https://brainstormer.chat",
     "privacyPolicyURL": "https://brainstormer.chat/privacy",

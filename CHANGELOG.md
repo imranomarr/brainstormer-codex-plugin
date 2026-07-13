@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.0-beta.3 - 2026-07-13
+
+- Limit MCP reads and related writes to shared session content.
+- Exclude Private Spaces, Private Space shells, and their linked tasks for every approving user.
+- Clarify how existing marketplace users refresh and reinstall the current plugin release.
+
 ## 0.3.0-beta.2 - 2026-07-13
 
 - Use the documented direct-map format for the bundled Brainstormer MCP server.
