@@ -1,7 +1,7 @@
 {
   "name": "brainstormer-codex",
-  "version": "0.3.0-beta.3",
-  "description": "Read shared content and organize one approved Brainstormer session in Codex through the Brainstormer MCP server.",
+  "version": "0.4.0-beta.1",
+  "description": "Read shared content, organize work, and use shared threads in one approved Brainstormer session through Codex.",
   "author": {
     "name": "Brainstormer",
     "email": "imran@brainstormer.chat",
@@ -18,13 +18,14 @@
     "notes",
     "tasks",
     "kanban",
-    "timeline"
+    "timeline",
+    "threads"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Brainstormer",
-    "shortDescription": "Read shared content, create notes, and organize one approved session.",
-    "longDescription": "Brainstormer Codex connects Codex to one OAuth-approved Brainstormer session. Codex can inspect shared session content, create new root notes/nodes, and use approved tools for standalone tasks, Task Groups, shared Kanban boards, and custom timeline events. Private Spaces and their linked tasks are never included.",
+    "shortDescription": "Read shared content and organize one approved session, including shared threads.",
+    "longDescription": "Brainstormer Codex connects Codex to one OAuth-approved Brainstormer session. Codex can inspect shared session content, create new root notes or threads, post to shared threads, and use approved tools for standalone tasks, Task Groups, shared Kanban boards, and custom timeline events. Private Spaces and their linked content are never included.",
     "developerName": "Brainstormer",
     "category": "Productivity",
     "capabilities": [
@@ -34,6 +35,7 @@
       "Task tools",
       "Kanban tools",
       "Timeline tools",
+      "Shared thread tools",
       "Session-scoped",
       "Shared-only access"
     ],
@@ -43,7 +45,8 @@
     "defaultPrompt": [
       "Summarize my approved Brainstormer session.",
       "Turn the previous answer into separate Brainstormer nodes.",
-      "Help me create or update Brainstormer tasks."
+      "Help me create or update Brainstormer tasks.",
+      "List the shared threads in my approved Brainstormer session."
     ],
     "brandColor": "#0B1110",
     "composerIcon": "./assets/icon.png",

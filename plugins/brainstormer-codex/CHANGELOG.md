@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0-beta.1 - 2026-07-15
+
+- Add shared-only thread listing, thread reading, atomic thread creation, and atomic post batching.
+- Add explicit `threads:read` and `threads:write` OAuth consent without silently expanding older grants.
+- Remove Brainstormer node links from MCP thread output and use response-local pseudonymous author labels.
+- Add dedicated low write limits, idempotent retries, response caps, metadata-only audits, and per-tool kill switches.
+- Mark MCP-created posts as `via Codex` and keep Private Spaces and their linked content unavailable.
+
 ## 0.3.0-beta.3 - 2026-07-13
 
 - Limit MCP reads and related writes to shared session content.
