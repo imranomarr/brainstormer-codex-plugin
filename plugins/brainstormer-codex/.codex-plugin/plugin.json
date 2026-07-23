@@ -1,6 +1,6 @@
 {
   "name": "brainstormer-codex",
-  "version": "0.4.0-beta.1",
+  "version": "0.4.0-beta.2+codex.20260723175456",
   "description": "Read shared content, organize work, and use shared threads in one approved Brainstormer session through Codex.",
   "author": {
     "name": "Brainstormer",
@@ -25,7 +25,7 @@
   "interface": {
     "displayName": "Brainstormer",
     "shortDescription": "Read shared content and organize one approved session, including shared threads.",
-    "longDescription": "Brainstormer Codex connects Codex to one OAuth-approved Brainstormer session. Codex can inspect shared session content, create new root notes or threads, post to shared threads, and use approved tools for standalone tasks, Task Groups, shared Kanban boards, and custom timeline events. Private Spaces and their linked content are never included.",
+    "longDescription": "Brainstormer Codex connects Codex to one OAuth-approved Brainstormer session with one role-based approval. Codex can inspect shared session content and, for owners, admins, and editors, use supported shared write tools. Viewers receive read-only access. Private Spaces and their linked content are never included.",
     "developerName": "Brainstormer",
     "category": "Productivity",
     "capabilities": [
@@ -45,8 +45,7 @@
     "defaultPrompt": [
       "Summarize my approved Brainstormer session.",
       "Turn the previous answer into separate Brainstormer nodes.",
-      "Help me create or update Brainstormer tasks.",
-      "List the shared threads in my approved Brainstormer session."
+      "Help me create or update Brainstormer tasks."
     ],
     "brandColor": "#0B1110",
     "composerIcon": "./assets/icon.png",

@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0-beta.2 - 2026-07-24
+
+- Restore the required `mcpServers` wrapper for the companion MCP manifest.
+- Declare the canonical OAuth resource explicitly and remove host-only configuration fields.
+- Add regression validation so malformed plugin MCP manifests fail before release.
+- Use one role-based OAuth approval for all currently supported actions in one session.
+- Give owners, admins, and editors nine scopes while viewers receive four read-only scopes.
+- Keep current-role checks and Codex write confirmations active after approval.
+- Require numeric native loopback callbacks, OAuth state, and PKCE S256 for dynamic clients.
+- Add atomic code exchange, refresh-token rotation and replay response, bounded request bodies, OAuth rate limits, cleanup, and the July 20 beta cutoff.
+- Use the canonical `brainstormer.chat` resource and one live source for all OAuth metadata.
+
 ## 0.4.0-beta.1 - 2026-07-15
 
 - Add shared-only thread listing, thread reading, atomic thread creation, and atomic post batching.
