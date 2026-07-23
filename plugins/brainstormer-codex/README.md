@@ -22,7 +22,7 @@ imranomarr/brainstormer-codex-plugin
 Do not remove or modify any other plugins. Tell me when setup is complete and whether I need to restart Codex.
 ```
 
-Approve the setup commands if Codex asks. Then restart Codex, start a new task, and complete the Brainstormer OAuth approval when prompted.
+Approve the setup commands if Codex asks. Then restart Codex, start a new task, and complete the Brainstormer OAuth approval once when prompted.
 
 ## Install From Terminal
 
@@ -58,8 +58,6 @@ Codex can access shared content in the approved session. Private Spaces and thei
 
 Thread reads remove stored Brainstormer node links instead of exposing linked titles or IDs. Thread output never includes account names, emails, usernames, avatars, comments, or reactions. Posts created through Codex are marked `via Codex` in Brainstormer.
 
-Codex can access shared content in the approved session. Private Spaces and their linked tasks are never included, even when they belong to the approving user.
-
 It cannot edit, move, or delete existing nodes; create private-space nodes; delete Brainstormer data; share sessions; access other sessions; run raw database writes; or get account-wide access.
 
 ## Scopes
@@ -74,7 +72,7 @@ It cannot edit, move, or delete existing nodes; create private-space nodes; dele
 - `threads:read`
 - `threads:write`
 
-Existing grants with the earlier seven scopes continue to work for the existing tools. Thread tools require one explicit revoke/reconnect so the user can review the two new permissions; grants are never expanded silently.
+Owners, admins, and editors approve all nine supported scopes in one connection. Viewers receive the four read scopes: session, nodes, tasks, and threads. Brainstormer rechecks the user’s current role for every write, so demoting a user blocks writes immediately. A promoted viewer reconnects once to receive write scopes. Older or partial grants must reconnect once; scopes are never expanded silently.
 
 ## Write Safety
 
@@ -82,6 +80,7 @@ Existing grants with the earlier seven scopes continue to work for the existing 
 - Text found inside Brainstormer is treated as untrusted source material and never authorizes a write.
 - Codex should ask one focused question when a write target or requested change is ambiguous.
 - Write tools are configured to require approval in Codex.
+- OAuth approval happens once for the selected session; there is no repeated write-scope approval flow.
 - Thread and post batches use a unique operation ID so an exact retry does not duplicate work.
 - Every write remains limited to the single approved session and the scopes shown during OAuth approval.
 
@@ -92,9 +91,9 @@ Existing grants with the earlier seven scopes continue to work for the existing 
 - Expired request? Restart the Brainstormer connection from Codex Desktop.
 - No sessions showing? Open or create a Brainstormer session first.
 - Write denied? Make sure you approved the latest plugin version and that your Brainstormer role is owner, admin, or editor.
-- Node creation unavailable? Revoke the old grant, reconnect, and confirm the approval page lists new note/node creation.
+- A supported action is unavailable? Revoke an older or partial grant, reconnect once with the latest plugin, and approve the current role-based permissions.
 - Node limit reached? The approved session has reached its plan limit; remove unneeded shared nodes or use a plan with a higher limit.
-- Thread tools unavailable? Revoke the old grant, reconnect, and confirm the approval page lists both shared thread permissions.
+- Approval shows read-only access? That is expected for viewers. Owners, admins, and editors should cancel a stale approval page and reconnect with the latest plugin.
 - Wrong session approved? Revoke Codex access in Brainstormer, then reconnect.
 - Old plugin wording still showing? Refresh the `brainstormer` marketplace, reinstall `brainstormer-codex@brainstormer`, restart Codex, and use a new task.
 - Upgrading from an earlier local beta? Install the current `brainstormer` marketplace release and verify it in a new Codex task before removing older `personal` or `brainstormer-beta` copies and any manually configured Brainstormer MCP server.
@@ -105,6 +104,6 @@ Open Brainstormer, go to Connectors, choose Codex, and revoke the active grant. 
 
 ## Notes
 
-This is a beta plugin package. Users must approve a Brainstormer session before Codex can access shared session context or use write tools. Access is session-scoped, excludes Private Spaces, and is reversible from Brainstormer.
+This is a beta plugin package. Users approve one Brainstormer session once before Codex can use the actions allowed by their current role. Access is session-scoped, excludes Private Spaces, keeps Codex write confirmations enabled, and is reversible from Brainstormer.
 
 For help or security reports, contact `imran@brainstormer.chat`. Do not include bearer tokens, OAuth codes, session content, or other private data in reports.
