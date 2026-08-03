@@ -24,6 +24,8 @@ Do not remove or modify any other plugins. Tell me when setup is complete and wh
 
 Approve the setup commands if Codex asks. Then restart Codex, start a new task, and complete the Brainstormer OAuth approval once when prompted.
 
+Plugin installation and Brainstormer sign-in are separate. Install or update the plugin only when a new plugin release is available. A normal connection should refresh in the background, including after access-token expiry and a Codex restart; repeatedly uninstalling and reinstalling the plugin is not required.
+
 ## Install From Terminal
 
 First-time setup:
@@ -87,6 +89,8 @@ Owners, admins, and editors approve all nine supported scopes in one connection.
 ## Troubleshooting
 
 - Not signed in? Sign in to Brainstormer, then approve Codex access.
+- Connection stopped working? First run `codex mcp login brainstormer`, complete approval if Codex opens it, restart Codex, and try a new task. Do not reinstall the plugin unless the marketplace itself is outdated or missing.
+- Signed in recently? Normal 60-minute access-token expiry should refresh silently. If Codex asks for approval repeatedly, report it as an OAuth refresh issue.
 - New account? Finish signup first, then start the Codex connection again.
 - Expired request? Restart the Brainstormer connection from Codex Desktop.
 - No sessions showing? Open or create a Brainstormer session first.
@@ -104,6 +108,6 @@ Open Brainstormer, go to Connectors, choose Codex, and revoke the active grant. 
 
 ## Notes
 
-This is a beta plugin package. Users approve one Brainstormer session once before Codex can use the actions allowed by their current role. Access is session-scoped, excludes Private Spaces, keeps Codex write confirmations enabled, and is reversible from Brainstormer.
+This is a beta plugin package. Users approve one Brainstormer session once before Codex can use the actions allowed by their current role. Active connections refresh in the background and remain available until revoked, unused for 90 days, or the private beta ends. Access is session-scoped, excludes Private Spaces, keeps Codex write confirmations enabled, and is reversible from Brainstormer.
 
 For help or security reports, contact `imran@brainstormer.chat`. Do not include bearer tokens, OAuth codes, session content, or other private data in reports.
