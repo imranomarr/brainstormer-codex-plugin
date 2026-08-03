@@ -63,7 +63,10 @@ assert(
   "marketplace source must point to the bundled plugin"
 );
 assert(entry.policy?.installation === "AVAILABLE", "plugin must remain available");
-assert(entry.policy?.authentication === "ON_INSTALL", "OAuth must remain ON_INSTALL");
+assert(
+  entry.policy?.authentication === "ON_USE",
+  "OAuth must start on first Brainstormer use"
+);
 
 for (const relativePath of [
   manifest.interface?.composerIcon,

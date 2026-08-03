@@ -22,9 +22,15 @@ imranomarr/brainstormer-codex-plugin
 Do not remove or modify any other plugins. Tell me when setup is complete and whether I need to restart Codex.
 ```
 
-Approve the setup commands if Codex asks. Then restart Codex, start a new task, and complete the Brainstormer OAuth approval once when prompted.
+Approve the setup commands if Codex asks. Then restart Codex, start a new task, and paste:
 
-Plugin installation and Brainstormer sign-in are separate. Install or update the plugin only when a new plugin release is available. A normal connection should refresh in the background, including after access-token expiry and a Codex restart; repeatedly uninstalling and reinstalling the plugin is not required.
+```text
+Use Brainstormer MCP to get my active session packet.
+```
+
+The first Brainstormer request starts OAuth. Sign in, choose one session, and approve it once. If Codex does not automatically retry the request after approval, paste the same test prompt again.
+
+Plugin installation and Brainstormer sign-in are separate. Installing makes the plugin available; the first Brainstormer request starts sign-in. Install or update the plugin only when a new release is available. A normal connection should refresh in the background, including after access-token expiry and a Codex restart. Reinstalling is not the normal sign-in or recovery path.
 
 ## Install From Terminal
 
@@ -42,7 +48,7 @@ codex plugin marketplace upgrade brainstormer
 codex plugin add brainstormer-codex@brainstormer
 ```
 
-Then restart Codex, start a new task, and complete the Brainstormer OAuth approval when prompted.
+Then restart Codex, start a new task, and ask Codex to use Brainstormer. The first Brainstormer request starts OAuth; approve one session once.
 
 ## What It Can Do
 
@@ -89,6 +95,7 @@ Owners, admins, and editors approve all nine supported scopes in one connection.
 ## Troubleshooting
 
 - Not signed in? Sign in to Brainstormer, then approve Codex access.
+- Plugin installed but no sign-in opened? Start a new Codex task and ask: `Use Brainstormer MCP to get my active session packet.` Authentication begins on first use, not during command-line installation.
 - Connection stopped working? First run `codex mcp login brainstormer`, complete approval if Codex opens it, restart Codex, and try a new task. Do not reinstall the plugin unless the marketplace itself is outdated or missing.
 - Signed in recently? Normal 60-minute access-token expiry should refresh silently. If Codex asks for approval repeatedly, report it as an OAuth refresh issue.
 - New account? Finish signup first, then start the Codex connection again.
@@ -104,7 +111,7 @@ Owners, admins, and editors approve all nine supported scopes in one connection.
 
 ## Revoke Or Reconnect
 
-Open Brainstormer, go to Connectors, choose Codex, and revoke the active grant. To reconnect, paste the setup prompt into Codex again and approve one session.
+Open Brainstormer, go to Connectors, choose Codex, and revoke the active grant. To reconnect, ask Codex to use Brainstormer again. If approval does not open, run `codex mcp login brainstormer`. Reinstall only when the plugin itself is missing or outdated.
 
 ## Notes
 
