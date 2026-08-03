@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.4.0-beta.3 - 2026-08-03
+
+- Keep active Brainstormer OAuth connections working through normal Codex restarts and access-token expiry.
+- Use 60-minute access tokens and rolling 90-day refresh inactivity, capped by the November 20 private-beta sunset.
+- Recover a retried immediate-parent refresh token without disconnecting the user.
+- Continue revoking the affected connection when an older refresh-token ancestor is replayed.
+- Clarify that repeatedly reinstalling the plugin is not the normal sign-in or recovery flow.
+
 ## 0.4.0-beta.2 - 2026-07-24
 
 - Restore the required `mcpServers` wrapper for the companion MCP manifest.
