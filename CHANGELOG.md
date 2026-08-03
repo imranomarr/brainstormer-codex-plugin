@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.4.0-beta.5 - 2026-08-03
+
+- Make the Codex Desktop App setup prompt include restart, first-use, and OAuth approval steps.
+- Clarify inside the copied prompt that installing the plugin does not mean OAuth is connected.
+
 ## 0.4.0-beta.4 - 2026-08-03
 
 - Start Brainstormer OAuth on the first Brainstormer tool use so command-line and Plugin page installations follow the same connection flow.

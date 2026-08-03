@@ -2,7 +2,7 @@
 
 Brainstormer lets Codex read and organize one Brainstormer session that the user approves through the Brainstormer MCP connection.
 
-## Install From Codex Desktop
+## Install From Codex Desktop App
 
 Open Codex Desktop, start a new task, and paste this:
 
@@ -19,7 +19,14 @@ imranomarr/brainstormer-codex-plugin
 2. Install the current Brainstormer plugin release, even if an older beta is already installed:
    codex plugin add brainstormer-codex@brainstormer
 
-Do not remove or modify any other plugins. Tell me when setup is complete and whether I need to restart Codex.
+3. Report whether the marketplace and plugin are installed. Do not claim OAuth is connected merely because installation succeeded.
+
+4. Tell me to fully restart Codex Desktop, start a new Codex task, and paste:
+   Use Brainstormer MCP to get my active session packet.
+
+5. Explain that the first Brainstormer request starts OAuth. I should sign in, choose one Brainstormer session, and approve it once.
+
+Do not remove or modify any other plugins or MCP servers.
 ```
 
 Approve the setup commands if Codex asks. Then restart Codex, start a new task, and paste:
