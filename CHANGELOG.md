@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0-beta.4 - 2026-08-03
+
+- Start Brainstormer OAuth on the first Brainstormer tool use so command-line and Plugin page installations follow the same connection flow.
+- Clarify that plugin installation and Brainstormer authorization are separate steps.
+- Replace reinstall-based recovery guidance with first-use OAuth and `codex mcp login brainstormer`.
+
 ## 0.4.0-beta.3 - 2026-08-03
 
 - Keep active Brainstormer OAuth connections working through normal Codex restarts and access-token expiry.
