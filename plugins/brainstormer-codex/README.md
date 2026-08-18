@@ -19,25 +19,37 @@ imranomarr/brainstormer-codex-plugin
 2. Install the current Brainstormer plugin release, even if an older beta is already installed:
    codex plugin add brainstormer-codex@brainstormer
 
-3. Report whether the marketplace and plugin are installed. Do not claim OAuth is connected merely because installation succeeded.
+3. Installing the plugin should automatically start Brainstormer OAuth. Wait for me to sign in and approve one account-level connection. Read/write is selected by default, and I can switch to read-only before approving.
 
-4. Tell me to fully restart Codex Desktop, start a new Codex task, and paste:
+   If OAuth does not start automatically, run:
+   codex mcp login brainstormer
+
+4. Report these separately:
+   - whether the marketplace is configured;
+   - whether the plugin is installed;
+   - whether Brainstormer OAuth was completed.
+
+   Do not claim OAuth is connected merely because installation succeeded.
+
+5. After OAuth approval, tell me to fully restart Codex Desktop, start a new Codex task, and paste:
    Use Brainstormer MCP to list my accessible sessions, then ask me which session to use.
-
-5. Explain that the first Brainstormer request starts OAuth. I should sign in and approve one account-level connection. Read/write is selected by default, and I can switch to read-only before approving.
 
 Do not remove or modify any other plugins or MCP servers.
 ```
 
-After restarting Codex, use this test prompt:
+For a fresh user, installing the plugin requests Brainstormer OAuth immediately. If Codex already has a usable Brainstormer connection, it can reuse that connection without showing another approval page. If install-time OAuth does not open, run:
+
+```bash
+codex mcp login brainstormer
+```
+
+After OAuth approval, restart Codex and use this test prompt:
 
 ```text
 Use Brainstormer MCP to list my accessible sessions, then ask me which session to use.
 ```
 
-The first Brainstormer request starts OAuth. Sign in and approve the connection once. If Codex does not automatically retry after approval, paste the test prompt again.
-
-Plugin installation and Brainstormer authorization are separate. Installing makes the tools available; the first tool request starts sign-in. A normal connection refreshes in the background and does not require reinstalling when you switch sessions.
+Plugin installation and Brainstormer authorization are separate states. Install-time authentication connects fresh users sooner, while a normal connection refreshes in the background and does not require reinstalling when you switch sessions.
 
 ## Install From Terminal
 
@@ -53,7 +65,7 @@ codex plugin marketplace upgrade brainstormer
 codex plugin add brainstormer-codex@brainstormer
 ```
 
-Restart Codex and ask it to list your accessible Brainstormer sessions.
+Installation should start OAuth automatically. If it does not, run `codex mcp login brainstormer`. Complete approval, then restart Codex and ask it to list your accessible Brainstormer sessions.
 
 ## How Session Selection Works
 
@@ -121,7 +133,7 @@ Existing older single-session grants are not widened automatically. Reconnect on
 
 ## Troubleshooting
 
-- No sign-in opened: start a new Codex task and ask it to list accessible Brainstormer sessions.
+- No sign-in opened during installation: run `codex mcp login brainstormer`, complete approval, then restart Codex.
 - No sessions returned: create a session or confirm that this Brainstormer account owns or collaborates in one.
 - Duplicate names: ask Codex to show role, last-modified time, and short UUID, then choose using the full UUID.
 - Write denied: confirm both that read/write was approved and that the current session role is owner, admin, or editor.

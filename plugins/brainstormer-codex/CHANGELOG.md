@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.0-beta.3 - 2026-08-18
+
+- Request Brainstormer OAuth during plugin installation by changing the marketplace authentication policy from `ON_USE` to `ON_INSTALL`.
+- Update the setup flow to wait for approval during installation, fall back to `codex mcp login brainstormer` when needed, and restart Codex only after authentication completes.
+- Keep installation and authorization status separate and avoid forcing reauthorization when Codex already has a usable Brainstormer connection.
+
 ## 0.5.0-beta.2 - 2026-08-18
 
 - Align the marketplace setup and consent guidance with the approval UI: read/write is selected by default, and users can switch to read-only before approving.
