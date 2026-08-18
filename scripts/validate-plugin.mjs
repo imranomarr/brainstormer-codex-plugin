@@ -6,6 +6,7 @@ const root = path.resolve(process.cwd());
 const pluginRoot = path.join(root, "plugins", "brainstormer-codex");
 const manifestPath = path.join(pluginRoot, ".codex-plugin", "plugin.json");
 const mcpPath = path.join(pluginRoot, ".mcp.json");
+const readmePath = path.join(pluginRoot, "README.md");
 const marketplacePath = path.join(root, ".agents", "plugins", "marketplace.json");
 const expectedUrl = "https://brainstormer.chat/api/codex-mcp";
 
@@ -17,10 +18,11 @@ function assert(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-const [manifest, mcp, marketplace] = await Promise.all([
+const [manifest, mcp, marketplace, readme] = await Promise.all([
   readJson(manifestPath),
   readJson(mcpPath),
   readJson(marketplacePath),
+  readFile(readmePath, "utf8"),
 ]);
 
 assert(manifest.name === "brainstormer-codex", "plugin name must be brainstormer-codex");
@@ -64,8 +66,12 @@ assert(
 );
 assert(entry.policy?.installation === "AVAILABLE", "plugin must remain available");
 assert(
-  entry.policy?.authentication === "ON_USE",
-  "OAuth must start on first Brainstormer use"
+  entry.policy?.authentication === "ON_INSTALL",
+  "OAuth must be requested during plugin installation"
+);
+assert(
+  readme.includes("codex mcp login brainstormer"),
+  "README must document the manual Brainstormer OAuth fallback"
 );
 
 for (const relativePath of [
