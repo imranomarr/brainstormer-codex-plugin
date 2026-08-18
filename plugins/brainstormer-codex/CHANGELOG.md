@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.5.0-beta.2 - 2026-08-18
+
+- Align the marketplace setup and consent guidance with the approval UI: read/write is selected by default, and users can switch to read-only before approving.
+- Keep existing grants unchanged until reconnect and preserve live role enforcement plus normal Codex write confirmations.
+
 ## 0.5.0-beta.1 - 2026-08-17
 
 - Replace per-session OAuth approval with one explicit account-level connection.
