@@ -24,7 +24,7 @@ imranomarr/brainstormer-codex-plugin
 4. Tell me to fully restart Codex Desktop, start a new Codex task, and paste:
    Use Brainstormer MCP to list my accessible sessions, then ask me which session to use.
 
-5. Explain that the first Brainstormer request starts OAuth. I should sign in and approve one account-level connection. Read-only is the safe default; read/write requires an explicit choice.
+5. Explain that the first Brainstormer request starts OAuth. I should sign in and approve one account-level connection. Read/write is selected by default, and I can switch to read-only before approving.
 
 Do not remove or modify any other plugins or MCP servers.
 ```
@@ -98,7 +98,7 @@ Read/write approval can additionally include:
 - `timelines:write`
 - `threads:write`
 
-Read-only is the default. Upgrading to read/write requires reconnecting and explicitly approving it; scopes are never expanded silently. Write scopes do not override Brainstormer roles, so a viewer remains unable to write.
+Read/write is selected by default for new account-level approvals, and users can switch to read-only before approving. Changing an existing grant's access level still requires reconnecting; scopes are never expanded silently. Write scopes do not override Brainstormer roles, so a viewer remains unable to write.
 
 ## Write Safety
 
