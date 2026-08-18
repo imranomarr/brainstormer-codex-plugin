@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.5.0-beta.1 - 2026-08-17
+
+- Replace per-session OAuth approval with one explicit account-level connection.
+- Add `brainstormer_list_sessions` with cursor pagination and duplicate-name disambiguators.
+- Require the full returned `session_id` on every session-bound tool while preserving a temporary legacy-grant fallback.
+- Add read-only and read/write consent choices, with read-only as the default and no silent scope upgrades.
+- Recheck live ownership or collaboration access on every call; removed access takes effect immediately.
+- Remove the private-beta sunset from new OAuth grants and use rolling 90-day inactivity expiry.
+- Keep Private Spaces excluded and preserve existing write confirmations, role checks, rate limits, audits, and kill switches.
+
 ## 0.4.0-beta.5 - 2026-08-03
 
 - Make the Codex Desktop App setup prompt include restart, first-use, and OAuth approval steps.

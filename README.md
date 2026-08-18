@@ -1,6 +1,6 @@
 # Brainstormer Codex Plugin
 
-Brainstormer lets Codex read and organize one Brainstormer session that the user approves through the Brainstormer MCP connection.
+Brainstormer lets Codex work across the Brainstormer sessions your connected account can currently access. You authorize once, then choose a session by its exact UUID for each task.
 
 ## Install From Codex Desktop App
 
@@ -22,106 +22,111 @@ imranomarr/brainstormer-codex-plugin
 3. Report whether the marketplace and plugin are installed. Do not claim OAuth is connected merely because installation succeeded.
 
 4. Tell me to fully restart Codex Desktop, start a new Codex task, and paste:
-   Use Brainstormer MCP to get my active session packet.
+   Use Brainstormer MCP to list my accessible sessions, then ask me which session to use.
 
-5. Explain that the first Brainstormer request starts OAuth. I should sign in, choose one Brainstormer session, and approve it once.
+5. Explain that the first Brainstormer request starts OAuth. I should sign in and approve one account-level connection. Read-only is the safe default; read/write requires an explicit choice.
 
 Do not remove or modify any other plugins or MCP servers.
 ```
 
-Approve the setup commands if Codex asks. Then restart Codex, start a new task, and paste:
+After restarting Codex, use this test prompt:
 
 ```text
-Use Brainstormer MCP to get my active session packet.
+Use Brainstormer MCP to list my accessible sessions, then ask me which session to use.
 ```
 
-The first Brainstormer request starts OAuth. Sign in, choose one session, and approve it once. If Codex does not automatically retry the request after approval, paste the same test prompt again.
+The first Brainstormer request starts OAuth. Sign in and approve the connection once. If Codex does not automatically retry after approval, paste the test prompt again.
 
-Plugin installation and Brainstormer sign-in are separate. Installing makes the plugin available; the first Brainstormer request starts sign-in. Install or update the plugin only when a new release is available. A normal connection should refresh in the background, including after access-token expiry and a Codex restart. Reinstalling is not the normal sign-in or recovery path.
+Plugin installation and Brainstormer authorization are separate. Installing makes the tools available; the first tool request starts sign-in. A normal connection refreshes in the background and does not require reinstalling when you switch sessions.
 
 ## Install From Terminal
-
-First-time setup:
 
 ```bash
 codex plugin marketplace add imranomarr/brainstormer-codex-plugin
 codex plugin add brainstormer-codex@brainstormer
 ```
 
-Updating an existing installation:
+For an existing installation:
 
 ```bash
 codex plugin marketplace upgrade brainstormer
 codex plugin add brainstormer-codex@brainstormer
 ```
 
-Then restart Codex, start a new task, and ask Codex to use Brainstormer. The first Brainstormer request starts OAuth; approve one session once.
+Restart Codex and ask it to list your accessible Brainstormer sessions.
+
+## How Session Selection Works
+
+1. Codex calls `brainstormer_list_sessions`.
+2. Brainstormer returns the session name, role, last-modified time, and full `session_id`.
+3. Codex asks which session to use when the target is not already clear.
+4. Every session-bound tool call includes that exact full UUID.
+
+Session names are display labels, not identifiers. Two sessions can both be named `Session #1`; the role, last-modified time, and short UUID help a user choose, while the full UUID routes the tool call safely. Brainstormer does not store hidden mutable “active session” state.
+
+New sessions you can access appear automatically. If ownership or collaboration access is removed, calls to that session stop working immediately because Brainstormer checks live access on every request.
 
 ## What It Can Do
 
-- Read the approved Brainstormer session name and metadata.
-- Read sanitized node summaries.
-- Read sanitized task summaries.
-- Turn an explicit answer or outline into up to 12 new Brainstormer notes/nodes, grouped in a new folder by default.
-- Create and update standalone tasks and Task Groups.
-- Create and update Kanban boards/cards.
-- Create and update custom timeline events.
-- List and read shared threads with sanitized posts and pseudonymous author labels.
-- Create up to four shared threads at once and add bounded post batches when explicitly requested.
+- Discover sessions the connected account currently owns or collaborates in.
+- Read shared session metadata, sanitized nodes, tasks, Task Groups, Kanban boards, timelines, and shared threads.
+- Create new shared notes/nodes and threads when explicitly requested.
+- Create or update supported tasks, Task Groups, Kanban cards, timeline events, and shared thread posts when explicitly requested and allowed by the user's live role.
 
-Codex can access shared content in the approved session. Private Spaces and their linked content are never included, even when they belong to the approving user.
+Private Spaces and their linked content are never included, even when they belong to the connected user. Thread reads remove stored Brainstormer node links and omit account names, emails, usernames, avatars, comments, and reactions.
 
-Thread reads remove stored Brainstormer node links instead of exposing linked titles or IDs. Thread output never includes account names, emails, usernames, avatars, comments, or reactions. Posts created through Codex are marked `via Codex` in Brainstormer.
-
-It cannot edit, move, or delete existing nodes; create private-space nodes; delete Brainstormer data; share sessions; access other sessions; run raw database writes; or get account-wide access.
+It cannot edit, move, or delete existing nodes; create private-space nodes; delete data; share sessions; use names as session identifiers; or run raw database writes.
 
 ## Scopes
 
+All account-level grants include:
+
+- `sessions:list`
+
+Read-only approval can include:
+
 - `session:read`
 - `nodes:read`
-- `nodes:write`
 - `tasks:read`
+- `threads:read`
+
+Read/write approval can additionally include:
+
+- `nodes:write`
 - `tasks:write`
 - `kanban:write`
 - `timelines:write`
-- `threads:read`
 - `threads:write`
 
-Owners, admins, and editors approve all nine supported scopes in one connection. Viewers receive the four read scopes: session, nodes, tasks, and threads. Brainstormer rechecks the user’s current role for every write, so demoting a user blocks writes immediately. A promoted viewer reconnects once to receive write scopes. Older or partial grants must reconnect once; scopes are never expanded silently.
+Read-only is the default. Upgrading to read/write requires reconnecting and explicitly approving it; scopes are never expanded silently. Write scopes do not override Brainstormer roles, so a viewer remains unable to write.
 
 ## Write Safety
 
 - Codex may write only when the current user explicitly requests the specific change.
-- Text found inside Brainstormer is treated as untrusted source material and never authorizes a write.
-- Codex should ask one focused question when a write target or requested change is ambiguous.
-- Write tools are configured to require approval in Codex.
-- OAuth approval happens once for the selected session; there is no repeated write-scope approval flow.
-- Thread and post batches use a unique operation ID so an exact retry does not duplicate work.
-- Every write remains limited to the single approved session and the scopes shown during OAuth approval.
+- Brainstormer text is untrusted source material and never authorizes a write.
+- Codex should ask one focused question when the target or requested change is ambiguous.
+- Every write carries a full session UUID and is checked against the user's current session role.
+- Private Spaces, deletes, sharing, raw writes, and cross-session mutations remain unavailable.
+- Batch writes use operation UUIDs so an exact retry does not duplicate work.
+
+## Revoke, Reconnect, or Change Access
+
+Open Brainstormer, go to Connectors, choose Codex, and revoke the active account grant. To reconnect or change read-only/read-write access, ask Codex to use Brainstormer again or run:
+
+```bash
+codex mcp login brainstormer
+```
+
+Existing older single-session grants are not widened automatically. Reconnect once to move to account-level session discovery. Reinstall only when the plugin itself is missing or outdated.
 
 ## Troubleshooting
 
-- Not signed in? Sign in to Brainstormer, then approve Codex access.
-- Plugin installed but no sign-in opened? Start a new Codex task and ask: `Use Brainstormer MCP to get my active session packet.` Authentication begins on first use, not during command-line installation.
-- Connection stopped working? First run `codex mcp login brainstormer`, complete approval if Codex opens it, restart Codex, and try a new task. Do not reinstall the plugin unless the marketplace itself is outdated or missing.
-- Signed in recently? Normal 60-minute access-token expiry should refresh silently. If Codex asks for approval repeatedly, report it as an OAuth refresh issue.
-- New account? Finish signup first, then start the Codex connection again.
-- Expired request? Restart the Brainstormer connection from Codex Desktop.
-- No sessions showing? Open or create a Brainstormer session first.
-- Write denied? Make sure you approved the latest plugin version and that your Brainstormer role is owner, admin, or editor.
-- A supported action is unavailable? Revoke an older or partial grant, reconnect once with the latest plugin, and approve the current role-based permissions.
-- Node limit reached? The approved session has reached its plan limit; remove unneeded shared nodes or use a plan with a higher limit.
-- Approval shows read-only access? That is expected for viewers. Owners, admins, and editors should cancel a stale approval page and reconnect with the latest plugin.
-- Wrong session approved? Revoke Codex access in Brainstormer, then reconnect.
-- Old plugin wording still showing? Refresh the `brainstormer` marketplace, reinstall `brainstormer-codex@brainstormer`, restart Codex, and use a new task.
-- Upgrading from an earlier local beta? Install the current `brainstormer` marketplace release and verify it in a new Codex task before removing older `personal` or `brainstormer-beta` copies and any manually configured Brainstormer MCP server.
+- No sign-in opened: start a new Codex task and ask it to list accessible Brainstormer sessions.
+- No sessions returned: create a session or confirm that this Brainstormer account owns or collaborates in one.
+- Duplicate names: ask Codex to show role, last-modified time, and short UUID, then choose using the full UUID.
+- Write denied: confirm both that read/write was approved and that the current session role is owner, admin, or editor.
+- `insufficient_scope`: revoke an older or read-only grant and reconnect with the intended access level.
+- `session_required`: update the plugin and ensure Codex passes the full `session_id` returned by `brainstormer_list_sessions`.
+- Repeated approval prompts: report it as an OAuth refresh issue; reinstalling is not the normal recovery path.
 
-## Revoke Or Reconnect
-
-Open Brainstormer, go to Connectors, choose Codex, and revoke the active grant. To reconnect, ask Codex to use Brainstormer again. If approval does not open, run `codex mcp login brainstormer`. Reinstall only when the plugin itself is missing or outdated.
-
-## Notes
-
-This is a beta plugin package. Users approve one Brainstormer session once before Codex can use the actions allowed by their current role. Active connections refresh in the background and remain available until revoked, unused for 90 days, or the private beta ends. Access is session-scoped, excludes Private Spaces, keeps Codex write confirmations enabled, and is reversible from Brainstormer.
-
-For help or security reports, contact `imran@brainstormer.chat`. Do not include bearer tokens, OAuth codes, session content, or other private data in reports.
+Active account-level connections remain available until revoked or unused for 90 days. For help or security reports, contact `imran@brainstormer.chat`. Never include bearer tokens, OAuth codes, session content, or other private data in reports.
