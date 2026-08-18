@@ -1,7 +1,7 @@
 {
   "name": "brainstormer-codex",
-  "version": "0.4.0-beta.5",
-  "description": "Read shared content, organize work, and use shared threads in one approved Brainstormer session through Codex.",
+  "version": "0.5.0-beta.1",
+  "description": "Read shared content and organize work across the Brainstormer sessions your connected account can access.",
   "author": {
     "name": "Brainstormer",
     "email": "imran@brainstormer.chat",
@@ -24,8 +24,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Brainstormer",
-    "shortDescription": "Read shared content and organize one approved session, including shared threads.",
-    "longDescription": "Brainstormer Codex connects Codex to one OAuth-approved Brainstormer session with one role-based approval. Codex can inspect shared session content and, for owners, admins, and editors, use supported shared write tools. Viewers receive read-only access. Private Spaces and their linked content are never included.",
+    "shortDescription": "Choose and organize accessible Brainstormer sessions through one connection.",
+    "longDescription": "Brainstormer Codex uses one account-level OAuth connection to discover sessions the user can currently access. Every content call targets an exact session UUID and rechecks the user's live role. Users choose read-only or read/write access during approval. Private Spaces and their linked content are never included.",
     "developerName": "Brainstormer",
     "category": "Productivity",
     "capabilities": [
@@ -36,14 +36,15 @@
       "Kanban tools",
       "Timeline tools",
       "Shared thread tools",
-      "Session-scoped",
+      "Account-level session discovery",
+      "Explicit session targeting",
       "Shared-only access"
     ],
     "websiteURL": "https://brainstormer.chat",
     "privacyPolicyURL": "https://brainstormer.chat/privacy",
     "termsOfServiceURL": "https://brainstormer.chat/terms",
     "defaultPrompt": [
-      "Summarize my approved Brainstormer session.",
+      "List my accessible Brainstormer sessions and ask which one to use.",
       "Turn the previous answer into separate Brainstormer nodes.",
       "Help me create or update Brainstormer tasks."
     ],
