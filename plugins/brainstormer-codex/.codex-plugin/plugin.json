@@ -1,6 +1,6 @@
 {
   "name": "brainstormer-codex",
-  "version": "0.5.0-beta.3",
+  "version": "0.6.0-beta.1",
   "description": "Read shared content and organize work across the Brainstormer sessions your connected account can access.",
   "author": {
     "name": "Brainstormer",
@@ -32,11 +32,14 @@
       "MCP",
       "OAuth",
       "Node creation",
+      "Nested folder creation",
+      "Shared note and thread moves with optional consent",
       "Task tools",
       "Kanban tools",
       "Timeline tools",
       "Shared thread tools",
       "Account-level session discovery",
+      "Named session creation within account limits",
       "Explicit session targeting",
       "Shared-only access"
     ],

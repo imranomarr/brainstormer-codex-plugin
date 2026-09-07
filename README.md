@@ -67,6 +67,14 @@ codex plugin add brainstormer-codex@brainstormer
 
 Installation should start OAuth automatically. If it does not, run `codex mcp login brainstormer`. Complete approval, then restart Codex and ask it to list your accessible Brainstormer sessions.
 
+## Create a Named Session
+
+Ask: `Create a new Brainstormer session named Launch plan.`
+
+Codex checks `brainstormer_get_account_status`, then calls `brainstormer_create_session` with the name and a unique operation ID. The response contains the new session UUID and updated capacity. Retries with the same ID and name return the same session. A new session starts empty, with automatic joining disabled.
+
+Free accounts can access three sessions total, including sessions they own and join. Plus limits come from the current plan configuration. Creation requires the new `sessions:write` permission: existing connections keep their current permissions until fresh approval. Reconnecting must request that scope; a client registered only for reading must register for the new capability first.
+
 ## How Session Selection Works
 
 1. Codex calls `brainstormer_list_sessions`.
@@ -80,14 +88,20 @@ New sessions you can access appear automatically. If ownership or collaboration 
 
 ## What It Can Do
 
+The Brainstormer web application repository maintains the complete current reference at `docs/brainstormer-mcp-current-features.md`, covering both Codex and Claude, all 34 tools, examples, limits and planned additions. Check the live catalog and release status when using an older deployment.
+
 - Discover sessions the connected account currently owns or collaborates in.
 - Read shared session metadata, sanitized nodes, tasks, Task Groups, Kanban boards, timelines, and shared threads.
 - Create new shared notes/nodes and threads when explicitly requested.
-- Create or update supported tasks, Task Groups, Kanban cards, timeline events, and shared thread posts when explicitly requested and allowed by the user's live role.
+- Automatically group multiple notes in a new folder at the session root by default. A single note and threads go directly at root. Target an existing folder when the user requests it.
+- On servers advertising `parent_folder_id`, create notes/nodes and threads directly inside an existing shared folder, including nested folders. Resolve the exact folder UUID first; Private Spaces remain excluded.
+- Create or update supported tasks, Task Groups, Kanban cards and timeline events, and add new posts to shared threads, when explicitly requested and allowed by the user's live role. Existing thread posts cannot be edited through MCP.
 
 Private Spaces and their linked content are never included, even when they belong to the connected user. Thread reads remove stored Brainstormer node links and omit account names, emails, usernames, avatars, comments, and reactions.
 
-It cannot edit, move, or delete existing nodes; create private-space nodes; delete data; share sessions; use names as session identifiers; or run raw database writes.
+It can create up to 12 empty folders in a nested tree and move existing shared notes and threads within one session. Moving requires the separate optional `nodes:move` approval. Shared children travel with their parent; private or unsupported branches are rejected. Names are clarified when ambiguous, and moves preserve content and IDs.
+
+It cannot edit or delete existing notes, directly move folders, change Private Spaces, share sessions, move content across sessions, use names as session identifiers, or run raw database writes.
 
 ## Scopes
 
@@ -104,11 +118,14 @@ Read-only approval can include:
 
 Read/write approval can additionally include:
 
+- `sessions:write` for named session creation
 - `nodes:write`
 - `tasks:write`
 - `kanban:write`
 - `timelines:write`
 - `threads:write`
+
+The separate, unchecked **Also allow moving existing shared notes and threads** option grants `nodes:move`. Existing write connections continue working without it. To enable moving, reconnect and explicitly select this option; token refresh never adds it automatically. This requires the updated Brainstormer approval page: if the checkbox is not available, moving cannot yet be enabled through that deployment. Do not repeatedly reconnect or assume ordinary write approval includes it.
 
 Read/write is selected by default for new account-level approvals, and users can switch to read-only before approving. Changing an existing grant's access level still requires reconnecting; scopes are never expanded silently. Write scopes do not override Brainstormer roles, so a viewer remains unable to write.
 
@@ -119,7 +136,7 @@ Read/write is selected by default for new account-level approvals, and users can
 - Codex should ask one focused question when the target or requested change is ambiguous.
 - Every write carries a full session UUID and is checked against the user's current session role.
 - Private Spaces, deletes, sharing, raw writes, and cross-session mutations remain unavailable.
-- Batch writes use operation UUIDs so an exact retry does not duplicate work.
+- Session creation, note/thread/folder creation, moves, and batches of new thread posts use operation UUIDs so an exact retry does not duplicate work. Folder and move batches each succeed completely or roll back. A folder creation followed by a move is two operations; if movement fails, the folder remains. Do not assume every task or board operation has the same behavior.
 
 ## Revoke, Reconnect, or Change Access
 

@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.6.0-beta.1 - 2026-09-07
+
+- Add standalone nested folder creation and same-session moves for shared notes and threads.
+- Require separate opt-in `nodes:move` consent; preserve existing connections and automatic note grouping.
+- Add fresh exact-ID/folder/parent discovery, whole-branch validation, atomic batches and safe retries.
+- Document existing-folder placement for new notes and threads.
+
+- Add account plan and session capacity discovery with `brainstormer_get_account_status`.
+- Add `brainstormer_create_session` for named, quota-checked, retry-safe session creation.
+- Require fresh approval of `sessions:write`; existing grants remain unchanged.
+
 ## 0.5.0-beta.3 - 2026-08-18
 
 - Request Brainstormer OAuth during plugin installation by changing the marketplace authentication policy from `ON_USE` to `ON_INSTALL`.
